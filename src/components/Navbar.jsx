@@ -16,10 +16,10 @@ export default function Navbar() {
 
           <div className="hidden md:flex space-x-8">
             <Link
-              to="#"
+              to={"/addItem"}
               className="text-secondary-dark hover:text-primary-dark"
             >
-              Products
+              Add item
             </Link>
             <Link
               to="#"
