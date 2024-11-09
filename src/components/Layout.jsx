@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./Home";
 import OwnItems from "./OwnItems";
 import Charts from "./Charts";
+import Donation from "./Donation";
 
 function Layout() {
   return (
@@ -9,6 +10,7 @@ function Layout() {
       <Home />
       <OwnItems />
       <Charts />
+      <Donation />
     </div>
   );
 }

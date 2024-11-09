@@ -1,0 +1,69 @@
+/* Header style */
+header {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Section style */
+section {
+  margin-bottom: 40px;
+}
+
+/* Plan container style */
+.plan-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* General Plan card style */
+.plan {
+  padding: 30px;
+  border-radius: 12px;
+  width:25rem;
+  height:15rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plan:hover {
+  transform: scale(1.05);
+}
+
+/* Donate card styling */
+.plan.donate {
+  background-color: #2a9ca8;
+  color: #fff; /* Text color for contrast */
+  padding:7rem;
+}
+
+/* Check Donations card styling */
+.plan.check-donations {
+  background-color: #fff;
+  color: #000; /* Dark text color for readability */
+  border: 1px solid #ddd; /* Optional: adds a subtle border */
+  padding:6.6rem;
+
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+/* Header paragraph styling */
+header p {
+  font-size: 1.2rem;
+  color: #6b7280;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
