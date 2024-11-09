@@ -9,32 +9,32 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link to={"/"} className="text-primary-dark text-2xl font-bold">
+            <Link to="/" className="text-primary-dark text-2xl font-bold">
               logo
             </Link>
           </div>
 
           <div className="hidden md:flex space-x-8">
             <Link
-              href="#"
+              to="#"
               className="text-secondary-dark hover:text-primary-dark"
             >
               Products
             </Link>
             <Link
-              href="#"
+              to="#"
               className="text-secondary-dark hover:text-primary-dark"
             >
               Customers
             </Link>
             <Link
-              href="#"
+              to="#"
               className="text-secondary-dark hover:text-primary-dark"
             >
               Pricing
             </Link>
             <Link
-              href="#"
+              to="#"
               className="text-secondary-dark hover:text-primary-dark"
             >
               Learn
@@ -50,7 +50,7 @@ export default function Navbar() {
             </Link>
             <Link
               to="/signup"
-              className="bg-primary DEFAULT text-white py-1 px-4 rounded hover:bg-primary-dark"
+              className="bg-primary text-white py-1 px-4 rounded hover:bg-primary-dark"
             >
               Sign Up
             </Link>
@@ -130,7 +130,7 @@ export default function Navbar() {
             </Link>
             <Link
               to="/signup"
-              className="bg-primary DEFAULT text-white py-1 px-4 rounded w-full hover:bg-primary-dark"
+              className="bg-primary text-white py-1 px-4 rounded w-full hover:bg-primary-dark"
             >
               Sign Up
             </Link>
