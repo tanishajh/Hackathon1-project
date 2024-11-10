@@ -1,0 +1,27 @@
+RecipeOfTheDay.css .recipe-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.recipe-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.recipe-card h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.recipe-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.recipe-card li {
+  padding: 5px 0;
+}

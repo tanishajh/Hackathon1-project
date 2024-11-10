@@ -9,10 +9,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "./components/Login";
 import DonationPage from "./components/Donationpage";
-import { AuthContext } from "./components/AuthContext"; 
-import Chatbot from './components/BotPress';
-import Map from './components/Map';
-import Footer from "./components/Footer";
+import { AuthContext } from "./components/AuthContext";
+import Chatbot from "./components/BotPress";
+import Map from "./components/Map";
+import About from "./components/About";
+import FeedbackForm from "./components/FeedbackForm";
 
 function App() {
   return (
@@ -20,25 +21,20 @@ function App() {
       <Router>
         <div className="bg-light-primary h-full font-poppins">
           <Navbar />
+          <Chatbot />
+
           <Routes>
-            {/* Home route */}
             <Route path="/" element={<Layout />} />
-
-            {/* Login route */}
+            <Route path="/map" element={<Map />} />
             <Route path="/login" element={<LoginPage />} />
-
-            {/* SignUp route */}
             <Route path="/signup" element={<SignUp />} />
-
-            {/* Add Item route */}
             <Route path="/addItem" element={<AddItem />} />
-
-            {/* Donation page route */}
             <Route path="/donation" element={<DonationPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/FeedbackForm" element={<FeedbackForm />} />
           </Routes>
         </div>
 
-        {/* Toast notifications */}
         <ToastContainer />
       </Router>
     </AuthContext>

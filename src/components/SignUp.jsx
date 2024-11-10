@@ -129,13 +129,15 @@ export default function CustomSignUpPage() {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ mb: 4 }}>
       <Box
         sx={{
           mt: 4,
           p: 2,
           border: `1px solid ${theme.palette.divider}`,
           borderRadius: 2,
+          backgroundColor: "white",
+          boxShadow: 3,
         }}
       >
         {!isOtpSent ? (
@@ -158,7 +160,7 @@ export default function CustomSignUpPage() {
               name="username"
               value={formData.username}
               onChange={handleInputChange}
-              margin="normal"
+              margin="dense"
             />
             <TextField
               fullWidth
@@ -167,7 +169,7 @@ export default function CustomSignUpPage() {
               type="email"
               value={formData.email}
               onChange={handleInputChange}
-              margin="normal"
+              margin="dense"
             />
             <TextField
               fullWidth
@@ -175,7 +177,7 @@ export default function CustomSignUpPage() {
               name="mobile"
               value={formData.mobile}
               onChange={handleInputChange}
-              margin="normal"
+              margin="dense"
             />
             <TextField
               fullWidth
@@ -183,7 +185,7 @@ export default function CustomSignUpPage() {
               name="address"
               value={formData.address}
               onChange={handleInputChange}
-              margin="normal"
+              margin="dense"
             />
             <TextField
               fullWidth
@@ -192,9 +194,9 @@ export default function CustomSignUpPage() {
               type="password"
               value={formData.password}
               onChange={handleInputChange}
-              margin="normal"
+              margin="dense"
             />
-            <Typography variant="h6" sx={{ mt: 2 }}>
+            <Typography variant="h7" sx={{ mt: 2 }}>
               Select Preference:
             </Typography>
             <RadioGroup

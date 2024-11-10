@@ -2,10 +2,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import themehook from "./AuthContext";
+import nonveg from "../assets/non-veg.png";
+import grosary from "../assets/grosary.jpeg";
+import fruits from "../assets/Fruits.jpeg";
+import Vegetables from "../assets/Vegetables.jpeg";
+import Dairy from "../assets/Dairy.jpeg";
 
 function AddItem() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [formVisible, setFormVisible] = useState(false);
+  const { userdata } = themehook();
   const [formData, setFormData] = useState({
     name: "",
     expDate: "",
@@ -68,6 +75,14 @@ function AddItem() {
     }
   };
 
+  const imageArray = [
+    { src: nonveg, alt: "Assorted non-vegetarian items" },
+    { src: grosary, alt: "Grocery items" },
+    { src: fruits, alt: "A variety of fresh fruits" },
+    { src: Vegetables, alt: "A variety of fresh vegetables" },
+    { src: Dairy, alt: "Dairy products like milk, cheese, and yogurt" },
+  ];
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -75,7 +90,7 @@ function AddItem() {
       name: formData.name,
       expiryDate: formData.expDate,
       send: 0,
-      userId: "672f4c6484b7073ac76b40ec",
+      userId: userdata._id,
     };
 
     try {
@@ -115,10 +130,13 @@ function AddItem() {
             onClick={() => handleCategoryClick(category._id)}
           >
             <img
-              src={"https://via.placeholder.com/100?text=Dairy"}
-              alt={"https://via.placeholder.com/100?text=Dairy"}
+              src={
+                imageArray[index]?.src ||
+                "https://via.placeholder.com/100?text=Image"
+              }
+              alt={imageArray[index]?.alt || "Category image"}
               style={{ width: "100px", height: "100px", objectFit: "cover" }}
-              className=" rounded-full"
+              className="rounded-full"
             />
             <p className="my-2">{category.name}</p>
           </div>

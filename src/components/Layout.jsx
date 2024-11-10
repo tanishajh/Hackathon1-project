@@ -5,6 +5,8 @@ import Charts from "./Charts";
 import Donation from "./Donation";
 import Map from "./Map";
 import Footer from "./Footer";
+import RecipeOfTheDay from "./RecipeOfTheDay";
+import WasteRecommendations from "./Recom";
 
 function Layout() {
   return (
@@ -13,8 +15,9 @@ function Layout() {
       <OwnItems />
       <Charts />
       <Donation />
-      <Map/>
-    
+      <RecipeOfTheDay />
+      <WasteRecommendations />
+      <Footer />
     </div>
   );
 }

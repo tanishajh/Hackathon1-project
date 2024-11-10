@@ -33,11 +33,11 @@ export default function Charts() {
             //   { id: 4, value: data[0]?.products.length, label: data[4]?.date },
             // ],
             data: [
-              { id: 0, value: "30", label: "11 - 11 - 2024" },
-              { id: 1, value: "20", label: "11 - 11 - 2024" },
-              { id: 2, value: "10", label: "11 - 11 - 2024" },
-              { id: 3, value: "15", label: "11 - 11 - 2024" },
-              { id: 4, value: "40", label: "11 - 11 - 2024" },
+              { id: 0, value: "3", label: "10 - 11 - 2024" },
+              { id: 1, value: "1", label: "09 - 11 - 2024" },
+              { id: 2, value: "5", label: "08 - 11 - 2024" },
+              { id: 3, value: "4", label: "07 - 11 - 2024" },
+              { id: 4, value: "1", label: "06 - 11 - 2024" },
             ],
             // Use labelFormatter to change label appearance
             label: {

@@ -12,7 +12,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="text-primary-dark text-2xl font-bold">
-              logo
+              अन्नसेवा
             </Link>
           </div>
           <div className="hidden md:flex space-x-8">
@@ -29,13 +29,13 @@ export default function Navbar() {
               Donation
             </Link>
             <Link
-              to="#"
+              to={"/about"}
               className="text-secondary-dark hover:text-primary-dark"
             >
               About us
             </Link>
             <Link
-              to="#"
+              to={"/FeedbackForm"}
               className="text-secondary-dark hover:text-primary-dark"
             >
               Feedback
@@ -114,28 +114,28 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-secondary-light">
           <a
-            href="#"
+            to={"/addItem"}
             className="block py-2 px-4 text-secondary-dark hover:text-primary-dark"
           >
-            Products
+            Add item
           </a>
           <a
-            href="#"
+            to={"/donation"}
             className="block py-2 px-4 text-secondary-dark hover:text-primary-dark"
           >
-            Customers
+            donation
           </a>
           <a
-            href="#"
+            to={"/about"}
             className="block py-2 px-4 text-secondary-dark hover:text-primary-dark"
           >
-            Pricing
+            about
           </a>
           <a
-            href="#"
+            to={"/FeedbackForm"}
             className="block py-2 px-4 text-secondary-dark hover:text-primary-dark"
           >
-            Learn
+            Feedback
           </a>
           {userdata ? (
             // If user is logged in, show the username

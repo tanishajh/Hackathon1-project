@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import themehook from "./AuthContext";
 
 function OwnItems() {
   const [itemData, setItemData] = useState([]);
+  const { userdata, username, setuserdata, setusername } = themehook();
 
   const getData = async () => {
     const res = await axios.get(
-      "http://localhost:3000/product/getLastTenProducts/672f4c6484b7073ac76b40ec"
+      `http://localhost:3000/product/getLastTenProducts/${userdata._id}`
     );
     // console.log(res.data.products);
     setItemData(res.data.products);
@@ -35,15 +37,26 @@ function OwnItems() {
               </tr>
             </thead>
             <tbody>
-              {itemData.map((item, index) => (
-                <tr key={item.id || index}>
-                  <th>{index + 1}</th>
-                  <td>{item.name}</td>
-                  <td>
-                    {new Date(item.expiryDate).toLocaleDateString("en-US")}
+              {itemData.length > 0 ? (
+                itemData.map((item, index) => (
+                  <tr key={item.id || index}>
+                    <th>{index + 1}</th>
+                    <td>{item.name}</td>
+                    <td>
+                      {new Date(item.expiryDate).toLocaleDateString("en-US")}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={3}
+                    style={{ textAlign: "center", padding: "16px" }}
+                  >
+                    No Data
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

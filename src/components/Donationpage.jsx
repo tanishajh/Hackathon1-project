@@ -8,23 +8,26 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { toast } from "react-toastify";
 import axios from "axios";
-import photo from "../assets/donation.png"; // Adjust path as needed
+import photo from "../assets/donation.png";
+import { useNavigate } from "react-router-dom";
+import themehook from "./AuthContext";
 
 export default function DonationPage() {
+  const { userdata, username, setuserdata, setusername } = themehook();
+  const navigate = useNavigate();
   const theme = useTheme();
   const [formData, setFormData] = useState({
-    items: [{ name: "", quantity: "" }],
+    items: [{ name: "", Quantity: "" }],
     description: "Good for health",
     currentAddress: "SPIT, Andheri",
-    destinationAddress: "",
-    selectNgo: ""
+    DestinationAddress: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name.startsWith("items")) {
-      const [_, index, property] = name.split(".");
+      const [field, index, property] = name.split(".");
       const updatedItems = [...formData.items];
       updatedItems[index][property] = value;
       setFormData({ ...formData, items: updatedItems });
@@ -36,7 +39,7 @@ export default function DonationPage() {
   const addFoodItem = () => {
     setFormData({
       ...formData,
-      items: [...formData.items, { name: "", quantity: "" }],
+      items: [...formData.items, { name: "", Quantity: "" }],
     });
   };
 
@@ -53,19 +56,19 @@ export default function DonationPage() {
     const apiUrl = "http://localhost:3000/donation/createDonation";
 
     const payload = {
-      userId: "672f4c6484b7073ac76b40ec",
+      userId: username._id,
       item: formData.items,
-      description: formData.description,
-      currentAddress: formData.currentAddress,
-      destinationAddress: formData.destinationAddress,
-      selectNgo: formData.selectNgo
+      Description: formData.description,
+      CurrentAddress: formData.currentAddress,
+      DestinationAddress: formData.DestinationAddress,
     };
 
     try {
       const response = await axios.post(apiUrl, payload);
 
       if (response.status === 201) {
-        toast.success("Donation successfully added. Please select NGO");
+        toast.success("Donation successfully added. Please select NJO");
+        navigate("/map");
       } else {
         toast.error(`Error: ${response.statusText || "Please try again"}`);
       }
@@ -90,7 +93,7 @@ export default function DonationPage() {
     >
       {/* Left Side: Image */}
       <div>
-        <img src={photo} alt="Donation" />
+        <img src={photo} />
       </div>
 
       {/* Right Side: Donation Form */}
@@ -127,8 +130,8 @@ export default function DonationPage() {
               <TextField
                 fullWidth
                 label={`Quantity of ${item.name}`}
-                name={`items.${index}.quantity`}
-                value={item.quantity}
+                name={`items.${index}.Quantity`}
+                value={item.Quantity}
                 onChange={handleChange}
                 margin="normal"
                 type="number"
@@ -175,63 +178,14 @@ export default function DonationPage() {
             margin="normal"
           />
 
-          <TextField
-            fullWidth
-            label="Select NGO"
-            name="selectNgo"
-            value={formData.selectNgo}
-            onChange={handleChange}
-            margin="normal"
-          />
-
-          <TextField
-            fullWidth
-            label="Destination Address"
-            name="destinationAddress"
-            value={formData.destinationAddress}
-            onChange={handleChange}
-            margin="normal"
-          />
-
           <Button
             variant="contained"
             color="primary"
             type="submit"
-            sx={{ mt: 2, backgroundColor: '#2A9CA8' }}
+            sx={{ mt: 2, backgroundColor: "#2A9CA8" }}
           >
             Submit Donation
           </Button>
-
-          {/* Contact Information */}
-          <Box
-            sx={{
-              mt: 4,
-              p: 3,
-              width: '100%',
-              backgroundColor: '#f7f7f7',
-              borderRadius: 2,
-              border: `1px solid ${theme.palette.divider}`,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography variant="h5" gutterBottom sx={{ color: 'black', textAlign: 'center', mb: 2 }}>
-              Contact Us
-            </Typography>
-            <Box display="flex" alignItems="center" mb={1}>
-              <HomeIcon style={{ marginRight: '10px' }} />
-              <Typography>Bhavan's Campus, Old D N Nagar, Andheri West, Mumbai</Typography>
-            </Box>
-            <Box display="flex" alignItems="center" mb={1}>
-              <EmailIcon style={{ marginRight: '10px' }} />
-              <Typography>ByteDevs@gmail.com</Typography>
-            </Box>
-            <Box display="flex" alignItems="center">
-              <PhoneIcon style={{ marginRight: '10px' }} />
-              <Typography>+1 787-504-2308</Typography>
-            </Box>
-          </Box>
         </form>
       </Box>
     </Container>
