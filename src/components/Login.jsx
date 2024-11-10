@@ -1,93 +1,115 @@
-import React, { useState } from 'react';
-import { Button, TextField, Typography, Container, Box } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import React, { useState } from "react";
+import { Button, TextField, Typography, Container, Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import themehook from "./AuthContext";
 
-export default function CustomSignUpPage() {
+export default function LoginPage() {
+  const { setuserdata, setusername } = themehook();
   const theme = useTheme();
-  const [formData, setFormData] = useState({
-    email: '',
-    phone: '',
+  const [loginData, setLoginData] = useState({
+    username: "",
+    password: "",
   });
-  const [error, setError] = useState('');
 
-  // Handle input changes
-  const handleInputChange = (e) => {
+  const navigate = useNavigate();
+
+  // Handle input changes dynamically
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setLoginData({ ...loginData, [name]: value });
   };
 
-  // Validate form and handle signup
-  const handleSignUp = () => {
-    const { email, phone } = formData;
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-    // Basic validation: email and phone
-    if (!email || !phone) {
-      setError('Please fill in both email and phone number.');
-      return;
+    const apiUrl = "http://localhost:3000/auth/login";
+
+    try {
+      const response = await axios.post(apiUrl, loginData);
+
+      if (response.data.status === true) {
+        toast.success("Login successful!");
+        // console.log("User Data:", response.data.existUser);
+        localStorage.setItem("user", JSON.stringify(response?.data?.existUser));
+        setuserdata(response?.data?.existUser);
+        setusername(response?.data?.existUser?.username);
+        navigate("/");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      const errorMessage =
+        error.response?.data?.message || "Error logging in. Please try again.";
+      toast.error(errorMessage);
     }
-
-    setError('');
-    console.log('Sign-Up Data:', formData); // Here you would typically call an API for signing up
   };
 
   return (
-    <div className="bg-light-primary min-h-screen flex justify-center items-center">
-      <Container maxWidth="sm">
-        <Box
-          sx={{
-            mt: 4,
-            p: 4,
-            border: `1px solid ${theme.palette.divider}`,
-            borderRadius: 2,
-            backgroundColor: 'white',
-          }}
-          className="shadow-lg rounded-lg" // Tailwind class for shadow and rounded corners
-        >
-          <Typography variant="h4" gutterBottom className="text-primary-dark font-poppins">
-            Sign In
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+      }}
+    >
+      <Box
+        sx={{
+          p: 4,
+          width: "100%",
+          maxWidth: "400px",
+          border: `1px solid ${theme.palette.divider}`,
+          borderRadius: 2,
+          backgroundColor: "rgba(255, 255, 255, 0.8)", // Semi-transparent background
+        }}
+        className="shadow-lg rounded-lg"
+      >
+        <form onSubmit={handleLogin}>
+          <Typography
+            variant="h4"
+            gutterBottom
+            sx={{ color: "black", textAlign: "center", mb: 2 }}
+          >
+            Login
           </Typography>
 
-          {/* Display error message if any */}
-          {error && (
-            <Typography color="error" variant="body2" sx={{ mb: 2 }} className="text-red-500">
-              {error}
-            </Typography>
-          )}
-
-          {/* Email Field */}
           <TextField
             fullWidth
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleInputChange}
+            label="Username"
+            name="username"
+            value={loginData.username}
+            onChange={handleChange}
             margin="normal"
-            className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary-light"
+            required
           />
 
-          {/* Phone Field */}
           <TextField
             fullWidth
-            label="Phone Number"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
+            label="Password"
+            name="password"
+            type="password"
+            value={loginData.password}
+            onChange={handleChange}
             margin="normal"
-            className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary-light"
+            required
           />
 
-          {/* Sign Up Button */}
           <Button
             variant="contained"
             color="primary"
-            onClick={handleSignUp}
-            sx={{ mt: 2 ,backgroundColor:"#2A9CA8"}}
+            type="submit"
+            sx={{ mt: 2, backgroundColor: "#2A9CA8" }}
           >
-            Sign In
+            Login
           </Button>
-        </Box>
-      </Container>
-    </div>
+        </form>
+      </Box>
+    </Container>
   );
 }

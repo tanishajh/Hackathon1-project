@@ -23,8 +23,8 @@ section {
 .plan {
   padding: 30px;
   border-radius: 12px;
-  width:25rem;
-  height:15rem;
+  width: 25rem;
+  height: 15rem;
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -39,7 +39,7 @@ section {
 .plan.donate {
   background-color: #2a9ca8;
   color: #fff; /* Text color for contrast */
-  padding:7rem;
+  padding: 7rem;
 }
 
 /* Check Donations card styling */
@@ -47,8 +47,7 @@ section {
   background-color: #fff;
   color: #000; /* Dark text color for readability */
   border: 1px solid #ddd; /* Optional: adds a subtle border */
-  padding:6.6rem;
-
+  padding: 6.6rem;
 }
 
 h1 {

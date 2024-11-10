@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function AddItem() {
@@ -9,60 +11,112 @@ function AddItem() {
     expDate: "",
   });
 
-  const categories = [
-    { name: "Fruits", image: "https://via.placeholder.com/100?text=Fruits" },
-    {
-      name: "Vegetables",
-      image: "https://via.placeholder.com/100?text=Vegetables",
-    },
-    { name: "Dairy", image: "https://via.placeholder.com/100?text=Dairy" },
-    {
-      name: "Beverages",
-      image: "https://via.placeholder.com/100?text=Beverages",
-    },
-  ];
+  const [categoryData, setCategoryData] = useState([]);
+  const [dateArray, setDateArray] = useState([]);
+
+  const getCategoryData = async () => {
+    const data = await axios.get(
+      "http://localhost:3000/category/getAllCategories"
+    );
+    setCategoryData(data.data.category);
+  };
+
+  useEffect(() => {
+    getCategoryData();
+  }, []);
+
+  const getOneCategory = async (id) => {
+    const data = await axios.get(
+      `http://localhost:3000/category/getCategory/${id}`
+    );
+    setDateArray(data.data.Category.items);
+  };
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setFormVisible(true);
+    getOneCategory(category);
   };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    if (name === "name") {
+      const matchedItem = dateArray.find(
+        (item) => item.name.toLowerCase() === value.toLowerCase()
+      );
+      if (matchedItem) {
+        const today = new Date();
+        const expDate = new Date(today);
+        expDate.setDate(today.getDate() + matchedItem.expiry);
+
+        setFormData({
+          name: matchedItem.name,
+          expDate: expDate.toISOString().split("T")[0],
+        });
+      } else {
+        setFormData({
+          name: value,
+          expDate: "",
+        });
+      }
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form Submitted: ", {
-      category: selectedCategory,
-      ...formData,
-    });
-    toast("Wow so easy!");
-    setSelectedCategory("");
-    setFormVisible(false);
-    setFormData({ name: "", expDate: "" });
+
+    const payload = {
+      name: formData.name,
+      expiryDate: formData.expDate,
+      send: 0,
+      userId: "672f4c6484b7073ac76b40ec",
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/product/createProduct",
+        payload
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        console.log("Form Submitted: ", payload);
+        toast("Product created successfully!");
+        setSelectedCategory("");
+        setFormVisible(false);
+        setFormData({ name: "", expDate: "" });
+        Navigate("/");
+      } else {
+        console.error("Failed to submit form", response.statusText);
+        toast("Error creating product");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast("Network error, try again later");
+    }
   };
 
   return (
     <div className=" bg-white flex flex-col items-center justify-center h-[90vh]">
       <h1 className=" font-bold text-lg my-2 text-primary-dark">Add Item</h1>
       <div style={{ display: "flex", gap: "20px" }}>
-        {categories.map((category, index) => (
+        {categoryData.map((category, index) => (
           <div
             key={index}
             style={{
               cursor: "pointer",
               textAlign: "center",
             }}
-            onClick={() => handleCategoryClick(category.name)}
+            onClick={() => handleCategoryClick(category._id)}
           >
             <img
-              src={category.image}
-              alt={category.name}
+              src={"https://via.placeholder.com/100?text=Dairy"}
+              alt={"https://via.placeholder.com/100?text=Dairy"}
               style={{ width: "100px", height: "100px", objectFit: "cover" }}
               className=" rounded-full"
             />
