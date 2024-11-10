@@ -217,11 +217,12 @@ export default function DonationPage() {
           </Typography>
           <Box display="flex" alignItems="center" mb={1}>
             <HomeIcon style={{ marginRight: '10px' }} />
-            <Typography>Urb Haciendas Marchany, Carr 368 K1 H0</Typography>
+            <Typography>Bhavan's Campus, Old D N Nagar, Andheri West, Mumbai, 
+            </Typography>
           </Box>
           <Box display="flex" alignItems="center" mb={1}>
             <EmailIcon style={{ marginRight: '10px' }} />
-            <Typography>impactojuventudgc@gmail.com</Typography>
+            <Typography>ByteDevs@gmail.com</Typography>
           </Box>
           <Box display="flex" alignItems="center">
             <PhoneIcon style={{ marginRight: '10px' }} />

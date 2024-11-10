@@ -1,0 +1,33 @@
+/* App.css */
+.ngo-list {
+  margin-top: 20px;
+}
+
+.ngo-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ngo-list li {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.ngo-info {
+  font-size: 14px;
+  color: #555;
+}
+
+.start-trip-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.start-trip-button:hover {
+  background-color: #0056b3;
+}
