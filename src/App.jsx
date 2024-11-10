@@ -1,17 +1,18 @@
-// App.jsx
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SignUp from "./components/SignUp";
-import BotPress from "./components/BotPress";
+// import BotPress from "./components/BotPress";
 import Layout from "./components/Layout";
 import AddItem from "./components/AddItem";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "./components/Login";
 import DonationPage from "./components/Donationpage";
-import { AuthContext } from "./components/AuthContext"; // Make sure this import is correct
+import { AuthContext } from "./components/AuthContext"; 
+import Chatbot from './components/BotPress';
+import Map from './components/Map';
+import Footer from "./components/Footer";
 
 function App() {
   return (
