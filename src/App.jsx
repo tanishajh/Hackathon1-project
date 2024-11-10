@@ -8,46 +8,40 @@ import AddItem from "./components/AddItem";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "./components/Login";
-import DonationPage from "./components/Donationpage"; 
+import DonationPage from "./components/Donationpage";
+import { AuthContext } from "./components/AuthContext"; 
 import Chatbot from './components/BotPress';
 import Map from './components/Map';
 import Footer from "./components/Footer";
 
 function App() {
   return (
-    <Router>
-      <div className="bg-light-primary h-full font-poppins">
-        <Navbar />
-        {/* Optional BotPress chatbot */}
-        <Chatbot />
+    <AuthContext>
+      <Router>
+        <div className="bg-light-primary h-full font-poppins">
+          <Navbar />
+          <Routes>
+            {/* Home route */}
+            <Route path="/" element={<Layout />} />
 
-        <Routes>
-          {/* Home route */}
-          <Route path="/" element={<Layout />} />
-          
-          {/* Map route */}
-          <Route path="/map" element={<Map />} />
-          
-          {/* Login route */}
-          <Route path="/login" element={<LoginPage />} />
-          
-          {/* SignUp route */}
-          <Route path="/signup" element={<SignUp />} />
-          
-          {/* Add Item route */}
-          <Route path="/addItem" element={<AddItem />} />
+            {/* Login route */}
+            <Route path="/login" element={<LoginPage />} />
 
-          {/* Donation page route */}
-          <Route path="/donation" element={<DonationPage />} />
-        </Routes>
-      </div>
-      
-      {/* Toast notifications */}
-      <ToastContainer />
+            {/* SignUp route */}
+            <Route path="/signup" element={<SignUp />} />
 
-      {/* Footer Component at the very bottom */}
-      <Footer />
-    </Router>
+            {/* Add Item route */}
+            <Route path="/addItem" element={<AddItem />} />
+
+            {/* Donation page route */}
+            <Route path="/donation" element={<DonationPage />} />
+          </Routes>
+        </div>
+
+        {/* Toast notifications */}
+        <ToastContainer />
+      </Router>
+    </AuthContext>
   );
 }
 

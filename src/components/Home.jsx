@@ -15,7 +15,7 @@ function Home() {
           industry. Lorem Ipsum has been the industry's standard dummy
         </p>
         <Link
-          to="/signup"
+          to="#youritems"
           className="bg-primary DEFAULT my-2 text-white py-1 px-4 rounded hover:bg-primary-dark"
         >
           see your food items
