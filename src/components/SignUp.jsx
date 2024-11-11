@@ -100,7 +100,7 @@ export default function CustomSignUpPage() {
         `http://localhost:3000/auth/verifyOtp/${userdata}`,
         { otp }
       );
-      if (response.data.status787866) {
+      if (response.data.status) {
         toast("OTP verified successfully!");
         navigate("/login");
       } else {

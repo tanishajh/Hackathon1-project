@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import themehook from "./AuthContext";
 import nonveg from "../assets/non-veg.png";
@@ -17,6 +17,7 @@ function AddItem() {
     name: "",
     expDate: "",
   });
+  const navigate = useNavigate();
 
   const [categoryData, setCategoryData] = useState([]);
   const [dateArray, setDateArray] = useState([]);
@@ -101,11 +102,11 @@ function AddItem() {
 
       if (response.status === 200 || response.status === 201) {
         console.log("Form Submitted: ", payload);
-        toast("Product created successfully!");
+        toast.success("Product created successfully!");
         setSelectedCategory("");
         setFormVisible(false);
         setFormData({ name: "", expDate: "" });
-        Navigate("/");
+        navigate("/");
       } else {
         console.error("Failed to submit form", response.statusText);
         toast("Error creating product");

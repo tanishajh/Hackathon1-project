@@ -11,15 +11,16 @@ function Home() {
           <span className="font-semibold"> Food and Sharing Food</span>
         </h1>
         <p className=" text-[15px] sm:text-[18px] text-center text-secondary-DEFAULT leading-tight">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy
+          {/* Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy */}
+          So come and join us in our journey.
         </p>
-        <Link
-          to="#youritems"
+        <a
+          href="#youritems"
           className="bg-primary DEFAULT my-2 text-white py-1 px-4 rounded hover:bg-primary-dark"
         >
           see your food items
-        </Link>
+        </a>
       </section>
       <section className="h-full w-full sm:w-1/2 flex justify-center items-center">
         <img

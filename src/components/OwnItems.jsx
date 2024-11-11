@@ -8,7 +8,7 @@ function OwnItems() {
 
   const getData = async () => {
     const res = await axios.get(
-      `http://localhost:3000/product/getLastTenProducts/${userdata._id}`
+      `http://localhost:3000/product/getLastTenProducts/${userdata?._id}`
     );
     // console.log(res.data.products);
     setItemData(res.data.products);

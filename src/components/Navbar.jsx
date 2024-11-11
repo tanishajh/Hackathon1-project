@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import themehook from "./AuthContext";
 import { BiLogOut } from "react-icons/bi";
@@ -6,6 +6,11 @@ import { BiLogOut } from "react-icons/bi";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { userdata, username, setuserdata, setusername } = themehook();
+
+  const handleLinkClick = () => {
+    setIsOpen(false); // Close the mobile menu when a link is clicked
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-light-primary w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,11 +47,10 @@ export default function Navbar() {
             </Link>
           </div>
           {userdata ? (
-            // If user is logged in, show the username
             <div className="hidden md:flex space-x-4 font-bold items-end">
               <h1>{username}</h1>
               <span
-                className=" cursor-pointer"
+                className="cursor-pointer"
                 onClick={() =>
                   document.getElementById("my_modal_1").showModal()
                 }
@@ -55,7 +59,6 @@ export default function Navbar() {
               </span>
             </div>
           ) : (
-            // If user is not logged in, show Login and Sign Up links
             <div className="hidden md:flex space-x-4">
               <Link
                 to="/login"
@@ -113,55 +116,60 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="md:hidden bg-secondary-light">
-          <a
+          <Link
             to={"/addItem"}
             className="block py-2 px-4 text-secondary-dark hover:text-primary-dark"
+            onClick={handleLinkClick} // Close the menu
           >
             Add item
-          </a>
-          <a
+          </Link>
+          <Link
             to={"/donation"}
             className="block py-2 px-4 text-secondary-dark hover:text-primary-dark"
+            onClick={handleLinkClick} // Close the menu
           >
-            donation
-          </a>
-          <a
+            Donation
+          </Link>
+          <Link
             to={"/about"}
             className="block py-2 px-4 text-secondary-dark hover:text-primary-dark"
+            onClick={handleLinkClick} // Close the menu
           >
-            about
-          </a>
-          <a
+            About
+          </Link>
+          <Link
             to={"/FeedbackForm"}
             className="block py-2 px-4 text-secondary-dark hover:text-primary-dark"
+            onClick={handleLinkClick} // Close the menu
           >
             Feedback
-          </a>
+          </Link>
           {userdata ? (
-            // If user is logged in, show the username
             <div className="flex space-x-4 py-2 px-4 font-bold">
               <h1>{username}</h1>
               <span
-                className=" cursor-pointer"
-                onClick={() =>
-                  document.getElementById("my_modal_1").showModal()
-                }
+                className="cursor-pointer"
+                onClick={() => {
+                  handleLinkClick();
+                  document.getElementById("my_modal_1").showModal();
+                }}
               >
                 <BiLogOut size={20} />
               </span>
             </div>
           ) : (
-            // If user is not logged in, show Login and Sign Up links
             <div className="py-2 px-4 flex space-x-4">
               <Link
                 to="/login"
                 className="text-secondary-dark border border-secondary-dark py-1 px-4 rounded w-full hover:bg-secondary-light"
+                onClick={handleLinkClick} // Close the menu
               >
                 Login
               </Link>
               <Link
                 to="/signup"
                 className="bg-primary text-white py-1 px-4 rounded w-full hover:bg-primary-dark"
+                onClick={handleLinkClick} // Close the menu
               >
                 Sign Up
               </Link>
@@ -171,7 +179,7 @@ export default function Navbar() {
       )}
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
-          <p className="py-4">Do you want to logout ?</p>
+          <p className="py-4">Do you want to logout?</p>
           <div className="modal-action">
             <form
               method="dialog"

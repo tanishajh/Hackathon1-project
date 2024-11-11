@@ -4,8 +4,8 @@ import "./Map.css";
 import { useNavigate } from "react-router-dom";
 
 function App() {
-  const navigate = useNavigate();
   const [map, setMap] = useState(null);
+  const navigate = useNavigate();
   const [directionsService, setDirectionsService] = useState(null);
   const [directionsRenderer, setDirectionsRenderer] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -89,7 +89,7 @@ function App() {
         directionsRenderer.setDirections(result);
         setSelectedRoute(result.routes[0].legs[0]);
         map.setZoom(14);
-        startAnimatedTrip(result.routes[0].legs[0], selectedNGO.name); // Pass NGO name
+        startAnimatedTrip(result.routes[0].legs[0], selectedNGO.name); // Pass the NGO name
       } else {
         alert("Could not display directions.");
       }
@@ -120,11 +120,9 @@ function App() {
 
     const animateMarker = () => {
       if (stepIndex >= totalSteps) {
-        // alert(`You have reached the destination: ${ngoName}!`);
-        // Show NGO name
-        navigate("/");
-        alert("Your donation id done and recahed at destination.");
+        alert(`You have reached the destination: ${ngoName}!`); // Show NGO name in alert
         return;
+        // navigate("/");
       }
 
       const nextStep = steps[stepIndex];
@@ -153,37 +151,31 @@ function App() {
   };
 
   return (
-    <div className=" bg-white">
-      <h1 className=" text-center front-bold mt-4">Route to Nearest NGO</h1>
+    <div>
+      <h1>Route to Nearest NGO</h1>
       <div
         ref={mapRef}
         style={{ height: "500px", width: "100%", marginTop: "20px" }}
       />
-      <div className="ngo-list p-5">
+      <div className="ngo-list">
         <h3>Select a Nearby NGO</h3>
-        <div className="">
+        <ul>
           {ngoList.map((place, index) => (
-            <section
-              key={index}
-              className=" bg-light-primary shadow rounded-md p-5 mt-4"
-            >
+            <li key={index}>
               <strong>{place.name}</strong>
               <br />
               <span className="ngo-info">
-                {place.vicinity} |{" "}
-                <span className=" font-semibold">
-                  Rating: {place.rating || "N/A"}
-                </span>
+                {place.vicinity} | Rating: {place.rating || "N/A"}
               </span>
               <button
-                className="bg-primary text-white py-1 px-3 mx-2 rounded hover:bg-primary-dark"
+                className="start-trip-button"
                 onClick={() => showDirectionsToNGO(index)}
               >
                 Start Trip
               </button>
-            </section>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );
